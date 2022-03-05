@@ -1,0 +1,179 @@
+$principal_color: #f44336;
+$background_color: #141414;
+$text_color: #ffffff;
+$top_number_img_lg: "5";
+$top_number_img_sm: "3";
+
+@font-face {
+  font-family: "Netflix Sans";
+  font-weight: 100;
+  font-display: optional;
+  src: url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Th.woff2)
+      format("woff2"),
+    url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Th.woff)
+      format("woff");
+}
+
+@mixin Tablet {
+  @media (max-width: 1280px) {
+    @content;
+  }
+}
+
+@mixin Mobile-Tablet {
+  @media (max-width: 710px) {
+    @content;
+  }
+}
+
+body {
+  background-color: $background_color;
+  color: $text_color;
+  font-family: "Netflix Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin-top: 0px;
+
+  img {
+    border-radius: 5px;
+    cursor: pointer;
+  }
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+  position: sticky;
+  top: 0px;
+  background-color: $background_color;
+
+  .header-logo {
+    display: flex;
+
+    img {
+      width: 160px;
+      cursor: pointer;
+    }
+
+    .platform-title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bolder;
+      font-size: 24px;
+      letter-spacing: 1px;
+      cursor: pointer;
+
+      @include Tablet {
+        display: none;
+      }
+    }
+  }
+
+  .header-buttons {
+    display: flex;
+
+    div {
+      padding: 0.5em 1em;
+      font-size: 18px;
+
+      &:hover {
+        transition: ease 0.4s;
+        cursor: pointer;
+        color: $text_color;
+        background-color: $principal_color;
+      }
+    }
+  }
+}
+
+.top {
+  display: flex;
+  justify-content: center;
+
+  @include Mobile-Tablet {
+    flex-direction: column;
+  }
+
+  .top-item {
+    display: flex;
+    margin: 0.2em;
+    min-width: 225px;
+
+    @include Mobile-Tablet {
+      justify-content: center;
+    }
+
+    img {
+      min-width: 225px;
+    }
+  }
+}
+
+.first,
+.second {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  .item {
+    display: flex;
+    margin: 0.2em;
+    min-width: 250px;
+    flex: auto;
+
+    &:hover {
+      transition: ease-in 0.2s;
+      transform: scale(1.1);
+      box-shadow: 0px 0px 10px $background_color;
+    }
+
+    @include Mobile-Tablet {
+      flex: content;
+    }
+
+    img {
+      flex: auto;
+      min-width: 250px;
+      max-width: 890px;
+    }
+  }
+}
+
+.section-title {
+  font-size: 24px;
+  margin-top: 1.5em;
+  margin-bottom: 0.4em;
+}
+
+#top-text::after {
+  content: $top_number_img_lg;
+
+  @include Tablet {
+    content: $top_number_img_sm;
+  }
+}
+
+.top {
+  @include Tablet {
+    & > :nth-child(n + 4) {
+      display: none;
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 0.3em;
+  height: 0.3em;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(231, 221, 221, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $principal_color;
+}
